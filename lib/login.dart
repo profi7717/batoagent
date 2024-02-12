@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:bcrypt/bcrypt.dart';
-// import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -42,16 +42,18 @@ class _LoginPageState extends State<LoginPage> {
       for (var item in jsonData) {
         data.add(Map<String, dynamic>.from(item));
 
-        parol = (item["password"]);
+        parol = (item["passwordd"]);
         name = (item["username"]);
-        // await SessionManager().set("staffid", (item["agent_id"]));
+
+        await SessionManager().set("staffid", (item["id"]));
         // await SessionManager().set("fullname", (item["f_I_O"]));
         // await SessionManager().set("rasm", (item["rasmi"]));
         // // await SessionManager().set("lavozim", (item["position"]));
-        // staffid = await SessionManager().get("staffid");
+        staffid = await SessionManager().get("staffid");
         // fullname = await SessionManager().get("fullname");
         // rasm = await SessionManager().get("rasm");
         // lavozim = await SessionManager().get("lavozim");
+        print('bu logindan: $staffid');
         //
         final bool checkPassword = BCrypt.checkpw('password', parol);
       }
